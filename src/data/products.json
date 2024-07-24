@@ -1,0 +1,37 @@
+[
+  {
+    "id": 0,
+    "title": "Franui New Version",
+    "description": "Ahora las Franuis viene con Chotolate Blanco y Amargo",
+    "code": "061099",
+    "price": 5000,
+    "status": true,
+    "stock": 100,
+    "category": "Dulces",
+    "thumbnails": [
+      "https://example.com/image2.jpg"
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Helado",
+    "description": "Helado de Vainilla, Chocolate y Americana",
+    "code": "06103",
+    "price": 4500,
+    "status": true,
+    "stock": 55,
+    "category": "Dulces",
+    "thumbnails": []
+  },
+  {
+    "id": 3,
+    "title": "Nuggets",
+    "description": "Nuggets 100% Pollo",
+    "code": "0312",
+    "price": 5000,
+    "status": true,
+    "stock": 10,
+    "category": "Salado",
+    "thumbnails": []
+  }
+]
