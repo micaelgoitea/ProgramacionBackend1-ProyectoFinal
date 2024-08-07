@@ -34,6 +34,7 @@ class ProductManager {
 
         this.products.push(newProduct);
         await this.guardarArchivo(this.products);
+        return newProduct;
     }
 
     async getProducts() {
@@ -44,10 +45,9 @@ class ProductManager {
         const product = this.products.find(item => item.id === id);
 
         if (!product) {
-            return `El producto con el ID ${id} no existe.`;
-        } else {
-            return product;
+            throw new Error(`El producto con el ID ${id} no existe.`);
         }
+        return product;
     }
 
     async updateProduct(id, updatedFields) {
@@ -91,7 +91,12 @@ class ProductManager {
     }
 
     async guardarArchivo(arrayOfProducts) {
-        await fs.writeFile(this.path, JSON.stringify(arrayOfProducts, null, 2));
+        try {
+            await fs.writeFile(this.path, JSON.stringify(arrayOfProducts, null, 2));
+            console.log('Archivo de productos actualizado con éxito.');
+        } catch (error) {
+            console.error('Error al guardar el archivo de productos:', error);
+        }
     }
 
     getNextId() {
