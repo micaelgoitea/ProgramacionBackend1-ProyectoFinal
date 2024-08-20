@@ -1,63 +1,81 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-        <title>Productos en Tiempo Real</title>
-    </head>
-    <body>
+  <head>
+    <meta charset="UTF-8">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous">
+    <title>Productos en Tiempo Real</title>
+  </head>
+  <body>
+
+    <h2>Productos en tiempo Real</h2>
+
+    <div class="container text-center">
+      <div class="row" id="contenedorProductos">
         
-        <h2>Productos en tiempo Real</h2>
+      </div>
+    </div>
 
-        <div class="container text-center">
-            <div class="row" id="contenedorProductos">
-                <!-- Las cards se agregarán aquí -->
-            </div>
+    <div class="container">
+      <h2>¿Qué producto te gustaría agregar?</h2>
+
+      <form id="formAgregarProducto" class="row g-3">
+        <div class="col-12">
+          <label for="inputTitle" class="form-label">Título del producto</label>
+          <input type="text" class="form-control" id="inputTitle"
+            placeholder="Título del producto" required>
         </div>
-
-        <div class="container"> 
-        <h2>¿Qué producto te gustaría agregar?</h2>
-        <!-- Formulario para agregar productos -->
-            <form id="formAgregarProducto" class="row g-3">
-  <div class="col-12">
-    <label for="inputTitle" class="form-label">Título del producto</label>
-    <input type="text" class="form-control" id="inputTitle" placeholder="Título del producto" required>
-  </div>
-  <div class="col-12">
-    <label for="inputDescription" class="form-label">Descripción del producto</label>
-    <input type="text" class="form-control" id="inputDescription" placeholder="Descripción del producto" required>
-  </div>
-  <div class="col-12">
-    <label for="inputCode" class="form-label">Código del Producto</label>
-    <input type="text" class="form-control" id="inputCode" placeholder="Código del Producto" required>
-  </div>
-  <div class="col-md-6">
-    <label for="inputPrice" class="form-label">Precio del producto</label>
-    <input type="number" class="form-control" id="inputPrice" placeholder="Precio del producto" required>
-  </div>
-  <div class="col-md-6">
-    <label for="inputStock" class="form-label">Stock del producto</label>
-    <input type="number" class="form-control" id="inputStock" placeholder="Stock del producto" required>
-  </div>
-  <div class="col-12">
-    <label for="inputCategory" class="form-label">Categoría del producto</label>
-    <input type="text" class="form-control" id="inputCategory" placeholder="Categoría del producto" required>
-  </div>
-  <div class="col-12">
-    <label for="inputThumbnails" class="form-label">Thumbnails del producto</label>
-    <input type="text" class="form-control" id="inputThumbnails" placeholder="Thumbnails del producto" required>
-  </div>
-  <div class="col-12">
-    <button type="submit" class="btn btn-primary" id="btnAgregarProducto">Agregar Producto</button>
-  </div>
-</form>
-
+        <div class="col-12">
+          <label for="inputDescription" class="form-label">Descripción del
+            producto</label>
+          <input type="text" class="form-control" id="inputDescription"
+            placeholder="Descripción del producto" required>
         </div>
+        <div class="col-12">
+          <label for="inputCode" class="form-label">Código del Producto</label>
+          <input type="text" class="form-control" id="inputCode"
+            placeholder="Código del Producto" required>
+        </div>
+        <div class="col-md-6">
+          <label for="inputPrice" class="form-label">Precio del producto</label>
+          <input type="number" class="form-control" id="inputPrice"
+            placeholder="Precio del producto" required>
+        </div>
+        <div class="col-md-6">
+          <label for="inputStock" class="form-label">Stock del producto</label>
+          <input type="number" class="form-control" id="inputStock"
+            placeholder="Stock del producto" required>
+        </div>
+        <div class="col-12">
+          <label for="inputCategory" class="form-label">Categoría del
+            producto</label>
+          <input type="text" class="form-control" id="inputCategory"
+            placeholder="Categoría del producto" required>
+        </div>
+        <div class="col-12">
+          <label for="inputThumbnails" class="form-label">Thumbnails del
+            producto</label>
+          <input type="text" class="form-control" id="inputThumbnails"
+            placeholder="Thumbnails del producto" required>
+        </div>
+        <div class="col-12">
+          <button type="submit" class="btn btn-primary"
+            id="btnAgregarProducto">Agregar Producto</button>
+        </div>
+      </form>
 
-        <script
-            src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.min.js"></script>
-        <script src="js/main.js"></script>
-    </body>
+    </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.min.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
 </html>

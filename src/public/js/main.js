@@ -13,7 +13,6 @@ const renderProductos = (productos) => {
         card.classList.add("p-2")
         card.innerHTML = `<div class="card col" style="width: 18rem;">
                             <img src="${element.thumbnails}" class="card-img-top" alt="...">
-                            <p>ID: ${element.id}</p>
                             <div class="card-body">
                             <h5 class="card-title">${element.title}</h5>
                             <p class="card-text">${element.description}</p>
@@ -28,7 +27,6 @@ const renderProductos = (productos) => {
     });
 };
 
-// Función para eliminar un producto
 const eliminarProducto = (id) => {
     console.log(`Eliminando producto con ID: ${id}`);
     socket.emit("eliminarProducto", id);
@@ -44,7 +42,7 @@ const eliminarProducto = (id) => {
 };
 
 const agregarProducto = () => {
-    // Obtener los valores del formulario
+    
     const title = document.getElementById("inputTitle").value;
     const description = document.getElementById("inputDescription").value;
     const code = document.getElementById("inputCode").value;
@@ -65,8 +63,8 @@ const agregarProducto = () => {
     };
 
     console.log("Enviando nuevo producto:", nuevoProducto);
+    
     socket.emit("agregarProducto", nuevoProducto);
-
     socket.once("confirmacionAgregacion", (response) => {
         if (response.status === 'success') {
             console.log(`Producto agregado exitosamente`);
@@ -76,12 +74,11 @@ const agregarProducto = () => {
         }
     });
 
-    // Limpia el formulario
     document.getElementById("formAgregarProducto").reset();
 };
 
 document.addEventListener("DOMContentLoaded", () => {
-    // Selecciona el botón por su ID
+
     const btnAgregarProducto = document.getElementById("btnAgregarProducto");
 
     btnAgregarProducto.addEventListener("click", (event) => {

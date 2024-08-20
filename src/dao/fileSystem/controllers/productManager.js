@@ -5,7 +5,7 @@ class ProductManager {
     constructor(path) {
         this.products = [];
         this.path = path;
-        this.leerArchivo(); // Leo el archivo Json para mantener los productos que ya tengo cargados
+        this.leerArchivo();
     }
 
     async addProduct({ title, description, code, price, status, stock, category, thumbnails }) {

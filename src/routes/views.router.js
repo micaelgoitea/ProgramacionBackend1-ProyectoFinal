@@ -1,15 +1,27 @@
 import { Router } from "express";
-import ProductManager from "../controllers/productManager.js";
+import ProductModel from "../dao/models/product.model.js";
 
 const router = Router();
-const prManager = new ProductManager("./src/data/products.json");
 
-router.get("/products", async (req, res) => {
+router.get("/products", async(req, res) => {
+    let page = req.query.page || 1;
+    let limit = 4;
+
     try {
-        const productos = await prManager.getProducts();
-        res.render("home", { productos });
+        const listadoProductos = await ProductModel.paginate ({}, {limit, page});
+
+        res.render("home", {
+            productos: listadoProductos.docs,
+            hasPrevPage: listadoProductos.hasPrevPage,
+            hasNextPage: listadoProductos.hasNextPage,
+            prevPage: listadoProductos.prevPage,
+            nextPage: listadoProductos.nextPage,
+            currentPage: listadoProductos.page,
+            totalPages: listadoProductos.totalPages
+        })
+
     } catch (error) {
-        res.status(500).send("Error al obtener los productos.");
+        res.status(500).send ("Error al cargar el listado de productos");
     }
 });
 

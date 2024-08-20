@@ -1,30 +1,22 @@
 import { Router } from "express";
-import ProductManager from "../controllers/productManager.js";
+import ProductManager from "../dao/db/productManager-db.js";
 
 const router = Router();
-const prManager = new ProductManager("./src/data/products.json");
-
-//Rutas productos:
+const prManager = new ProductManager();
 
 router.get("/api/products", async (req, res) => {
-    let limit = req.query.limit;
+    const { limit, category, sort } = req.query;
     try {
-        const arrayOfProducts = await prManager.getProducts();
-        if (limit) {
-            res.send(arrayOfProducts.slice(0, limit));
-        } else {
-            res.send(arrayOfProducts);
-        }
+        const result = await prManager.getProducts({ limit, category, sort });
+        res.send(result);
     } catch (error) {
         res.status(500).send("Error interno del servidor");
     }
-})
+});
 
 router.get("/api/products/:pid", async (req, res) => {
-    let id = parseInt(req.params.pid);
-
+    let id = req.params.pid;
     const product = await prManager.getProductById((id));
-
     if (!product) {
         res.send("No se encuentra el producto deseado");
     } else {
@@ -35,30 +27,29 @@ router.get("/api/products/:pid", async (req, res) => {
 router.post("/api/products", async (req, res) => {
     const newProduct = req.body;
     try {
-        await prManager.addProduct(newProduct);
-        res.status(201).send({ message: "Producto agregado exitosamente" });
+        const product = await prManager.addProduct(newProduct);
+        res.status(201).send({ message: "Producto agregado exitosamente", product });
     } catch (error) {
-        res.status(500).send({ status: "error", message: error.message });
+        res.status(400).send({ status: "error", message: error.message });
     }
-})
+});
 
 router.put('/api/products/:pid', async (req, res) => {
-    const pid = parseInt(req.params.pid);
-    const updatedFields = req.body;
+    const pid = req.params.pid;
+    const productoActualizado = req.body;
     try {
-        const productoActualizado = await prManager.updateProduct(pid, updatedFields);
-        res.json(productoActualizado);
-        res.status(201).send({ message: "Producto actualizado exitosamente" });
+        await prManager.updateProduct(pid, productoActualizado);
+        res.status(200).json({ message: "Producto actualizado exitosamente", data: productoActualizado });
     } catch (error) {
         res.status(404).json({ error: error.message });
     }
 });
 
 router.delete('/api/products/:pid', async (req, res) => {
-    const pid = parseInt(req.params.pid);
+    const pid = req.params.pid;
     try {
-        const result = await prManager.deleteProduct(pid);
-        res.json({ message: result });
+        await prManager.deleteProduct(pid);
+        res.json({ message: "Producto eliminado correctamente" });
     } catch (error) {
         res.status(404).json({ error: error.message });
     }
